@@ -9,7 +9,7 @@ setup(
     url='https://github.com/StellarWolfEntertainment/mkdocs-external-link-processor',
     packages=find_packages(),
     install_requires=[
-        'mkdocs>=1.0.0',
+        'mkdocs>=1.4.0',
         'beautifulsoup4>=4.9.0'
     ],
     entry_points={

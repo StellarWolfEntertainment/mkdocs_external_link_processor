@@ -1,7 +1,24 @@
 from mkdocs.plugins import BasePlugin
+from mkdocs.config.config_options import Type
+from mkdocs.config.base import Config
 from bs4 import BeautifulSoup
 
-class MkdocsExternalLinkProcessor(BasePlugin):
+class MkdocsExternalLinkProcessorConfig(Config):
+    """
+    Configuration class for MkdocsExternalLinkProcessor.
+    
+    Attributes:
+        class_name (str): The class name to add to external links. Defaults to 'external'.
+        link_target (str): The target attribute value for links, e.g., '_blank' to open links in a new tab. Defaults to an empty string.
+        link_rel (list): The rel attribute value(s) to apply to links. Defaults to an empty list.
+        additional_protocols (list): Additional protocols to consider as external. Defaults to an empty list.
+    """
+    class_name = Type(str, default='external')
+    link_target = Type(str, default='')
+    link_rel = Type(list, default=list())
+    additional_protocols = Type(list, default=list())
+
+class MkdocsExternalLinkProcessor(BasePlugin[MkdocsExternalLinkProcessorConfig]):
     """
     MkdocsExternalLinkProcessor is a MkDocs plugin that processes HTML content to modify external links.
     
@@ -10,10 +27,10 @@ class MkdocsExternalLinkProcessor(BasePlugin):
 
     Attributes:
         class_name (str): The class name to add to external links. Defaults to 'external'.
-        target (str): The target attribute value for links, e.g., '_blank' to open links in a new tab. Defaults to an empty string.
-        rel (list): The rel attribute value(s) to apply to links. Defaults to an empty list.
+        link_target (str): The target attribute value for links, e.g., '_blank' to open links in a new tab. Defaults to an empty string.
+        link_rel (list): The rel attribute value(s) to apply to links. Defaults to an empty list.
         additional_protocols (list): Additional protocols to consider as external. Defaults to an empty list.
-        default_protocols (list): The standard list of protocols to consider as external links. Includes 'http://', 'https://', 'ftp://', 'mailto:', 'tel:'.
+        default_protocols (list): The standard list of protocols to consider as external links. Includes 'http://', 'https://', 'ftp://', 'mailto:', 'tel:', 'www'.
         all_protocols (list): Combination of default_protocols and additional_protocols.
 
     Methods:
@@ -23,25 +40,13 @@ class MkdocsExternalLinkProcessor(BasePlugin):
 
     def __init__(self, *args, **kwargs):
         """
-        Initializes the MkdocsExternalLinkProcessor with configuration options.
+        Initializes the MkdocsExternalLinkProcessor plugin.
         
         Args:
-            *args: Variable length argument list, passed to the parent class initializer.
-            **kwargs: Arbitrary keyword arguments, used to configure the plugin.
-
-        Configurable options:
-            - 'class_name': The class name to add to external links (str).
-            - 'link_target': The target attribute value for links (str).
-            - 'link_rel': The rel attribute value(s) for links (list of str).
-            - 'additional_protocols': Additional protocols to consider as external links (list of str).
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.class_name = self.config.get('class_name', 'external')
-        self.target = self.config.get('link_target', '')
-        self.rel = self.config.get('link_rel', [])
-        self.additional_protocols = self.config.get('additional_protocols', [])
-        self.default_protocols = ['http://', 'https://', 'ftp://', 'mailto:', 'tel:']
-        self.all_protocols = self.default_protocols + self.additional_protocols
 
     def on_page_content(self, html: str, page, config, files) -> str:
         """
@@ -63,20 +68,27 @@ class MkdocsExternalLinkProcessor(BasePlugin):
         Returns:
             str: The modified HTML content with updated external links.
         """
+        class_name = self.config.class_name
+        target = self.config.link_target
+        rel = self.config.link_rel
+        additional_protocols = self.config.additional_protocols
+        default_protocols = ['http://', 'https://', 'ftp://', 'mailto:', 'tel:', 'www']
+        all_protocols = default_protocols + additional_protocols
+
         soup = BeautifulSoup(html, 'html.parser')
         for a_tag in soup.find_all('a', href=True):
             href = a_tag['href']
-            if any(href.startswith(protocol) for protocol in self.all_protocols):
-                if 'external' not in a_tag.get('class', []):
+            if any(href.startswith(protocol) for protocol in all_protocols):
+                if class_name and class_name not in a_tag.get('class', []):
                     classes = a_tag.get('class', [])
                     if not isinstance(classes, list):
                         classes = []
-                    a_tag['class'] = classes + [self.class_name]
+                    a_tag['class'] = classes + [class_name]
 
-            if self.target:
-                a_tag["target"] = self.target
+            if target:
+                a_tag["target"] = target
 
-            if self.rel:
-                a_tag["rel"] = self.rel
+            if rel:
+                a_tag["rel"] = rel
 
         return str(soup)
