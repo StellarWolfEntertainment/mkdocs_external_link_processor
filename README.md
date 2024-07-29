@@ -3,9 +3,7 @@
 [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/StellarWolfEntertainment/mkdocs_external_link_processor)](https://github.com/StellarWolfEntertainment/mkdocs_external_link_processor/issues)
 [![Downloads](https://img.shields.io/github/downloads/StellarWolfEntertainment/mkdocs_external_link_processor/total)](https://github.com/StellarWolfEntertainment/mkdocs_external_link_processor/releases)
 [![Contributors](https://img.shields.io/github/contributors/StellarWolfEntertainment/mkdocs_external_link_processor)](https://github.com/StellarWolfEntertainment/mkdocs_external_link_processor/graphs/contributors)
-
-
-
+![GitHub top language](https://img.shields.io/github/languages/top/StellarWolfEntertainment/mkdocs_external_link_processor)
 
 # MkdocsExternalLinkProcessor
 
