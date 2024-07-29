@@ -1,5 +1,4 @@
-[![GitHub License](https://img.shields.io/github/license/StellarWolfEntertainment/mkdocs_external_link_processor)
-](LICENSE.md)
+[![GitHub License](https://img.shields.io/github/license/StellarWolfEntertainment/mkdocs_external_link_processor)](LICENSE.md)
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/StellarWolfEntertainment/mkdocs_external_link_processor/.github%2Fworkflows%2Fworkflow.yml)](https://github.com/StellarWolfEntertainment/mkdocs_external_link_processor/actions/workflows/workflow.yml)
 [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/StellarWolfEntertainment/mkdocs_external_link_processor)](https://github.com/StellarWolfEntertainment/mkdocs_external_link_processor/issues)
 [![Downloads](https://img.shields.io/github/downloads/StellarWolfEntertainment/mkdocs_external_link_processor/total)](https://github.com/StellarWolfEntertainment/mkdocs_external_link_processor/releases)
