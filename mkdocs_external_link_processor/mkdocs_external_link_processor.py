@@ -11,6 +11,7 @@ class MkdocsExternalLinkProcessor(BasePlugin):
     Attributes:
         class_name (str): The CSS class to add to external links. Defaults to 'external'.
     """
+    
     def __init__(self, *args, **kwargs):
         """
         Initializes the plugin and retrieves the CSS class name from the configuration.
@@ -26,6 +27,9 @@ class MkdocsExternalLinkProcessor(BasePlugin):
         """
         Process the HTML content of the page, adding a class to external links.
 
+        This method modifies the HTML content by appending a specified CSS class to
+        external links and setting them to open in a new tab with secure attributes.
+
         Args:
             html (str): The HTML content of the page.
             page (Page): The page object.
@@ -33,7 +37,8 @@ class MkdocsExternalLinkProcessor(BasePlugin):
             files (Files): The list of files to be processed.
 
         Returns:
-            str: The modified HTML content with the class added to external links.
+            str: The modified HTML content with the class added to external links,
+                 and the links set to open in a new tab with secure attributes.
         """
         soup = BeautifulSoup(html, 'html.parser')
         for a_tag in soup.find_all('a', href=True):
@@ -45,7 +50,6 @@ class MkdocsExternalLinkProcessor(BasePlugin):
                     if not isinstance(classes, list):
                         classes = []
                     a_tag['class'] = classes + [self.class_name]
-
-                a_tag['target']= '_blank'
-                a_tag['rel'] = 'noopener noreferrer'
+                a_tag["target"] = '_blank'
+                a_tag["rel"] = ['noopener', 'noreferrer']
         return str(soup)
