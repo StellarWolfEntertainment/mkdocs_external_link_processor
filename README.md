@@ -16,9 +16,10 @@ To install the plugin, include it in your MkDocs project by placing the `mkdocs_
 1. Save the plugin file as `mkdocs_external_link_processor.py`.
 2. Add the plugin to your `mkdocs.yml` configuration:
 
-    # yaml
+    ```yaml
     plugins:
       - mkdocs_external_link_processor
+    ```
 
 ## Configuration
 
