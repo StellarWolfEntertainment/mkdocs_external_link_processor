@@ -1,48 +1,64 @@
-# MkDocs External Link Processor
+# MkdocsExternalLinkProcessor
 
-A MkDocs plugin that adds a CSS class to external links in your documentation.
+The `MkdocsExternalLinkProcessor` is a [MkDocs](https://mkdocs.org) plugin designed to enhance the handling of external links in your documentation. It allows you to add specific CSS classes, set the `target` attribute, and configure the `rel` attribute for external links.
 
 ## Features
 
-- Automatically adds a specified CSS class to external links (links starting with `http://` or `https://`).
-- Configurable class name for external links.
-- Adds `target="_blank"` and `rel="noopener noreferrer"` to external links for improved security.
+- **Add Class to External Links**: Automatically add a specified CSS class to all external links.
+- **Configure Link Target**: Set the `target` attribute (e.g., `_blank`) to control how links open.
+- **Configure Link Rel Attribute**: Set the `rel` attribute for external links for improved security and SEO.
+- **Custom Protocols**: Extend the default list of protocols to include additional ones.
 
 ## Installation
 
-You can install the plugin via pip:
+To install the plugin, include it in your MkDocs project by placing the `mkdocs_external_link_processor.py` file in your project and adding it to your `mkdocs.yml` configuration file.
 
-```bash
-pip install mkdocs-external-link-processor
-```
+1. Save the plugin file as `mkdocs_external_link_processor.py`.
+2. Add the plugin to your `mkdocs.yml` configuration:
 
-## Usage
+    # yaml
+    plugins:
+      - mkdocs_external_link_processor
 
-Add the plugin to your mkdocs.yml configuration file:
+## Configuration
+
+You can configure the plugin by adding the following options to your `mkdocs.yml`:
 
 ```yaml
 plugins:
   - mkdocs_external_link_processor:
-      class_name: 'external'                 # Optional: default is 'external'
-      link_target: '_blank'                  # Optional: default is '_blank'
-      link_rel: ['noopener', 'noreferrer']   # Optional: default is ['noopener', 'noreferrer']
+      class_name: 'external'                # Class name to add to external links
+      link_target: '_blank'                 # Target attribute for links
+      link_rel: ['noopener', 'noreferrer']  # Rel attribute for links
+      additional_protocols: ['custom:']     # Additional protocols to consider as external
 ```
 
-## Configuration
+### Configuration Options
 
-- **class_name**: The CSS class to add to external links. Default is external.
-- **link_target**: The value for the target attribute of external links. Default is _blank.
-- **link_rel**: The value for the rel attribute of external links. Default is \['noopener', 'noreferrer'\].
+- **`class_name`**: The CSS class to add to external links. Defaults to `'external'`.
+- **`link_target`**: The `target` attribute for links. Use `'_blank'` to open links in a new tab. Defaults to an empty string.
+- **`link_rel`**: The `rel` attribute values to apply to links. Defaults to an empty list.
+- **`additional_protocols`**: Additional protocols to consider as external links. Defaults to an empty list.
+
+## Usage
+
+After configuring the plugin, it will automatically process the links in your documentation:
+
+1. **Add Class**: All external links will have the specified class added.
+2. **Set Target**: The `target` attribute will be set according to your configuration.
+3. **Set Rel**: The `rel` attribute will be added to external links.
 
 ## Example
 
-If you have a link like this:
+Given the following HTML content:
 
 ```html
 <a href="https://example.com">Example</a>
+<a href="mailto:contact@example.com">Contact</a>
+<a href="custom:protocol">Custom Protocol</a>
 ```
 
-And the plugin is configured as follows:
+With the configuration:
 
 ```yaml
 plugins:
@@ -50,28 +66,25 @@ plugins:
       class_name: 'external'
       link_target: '_blank'
       link_rel: ['noopener', 'noreferrer']
-````
+      additional_protocols: ['custom:']
+```
 
-It will be transformed to:
+The resulting HTML will be:
 
 ```html
 <a href="https://example.com" class="external" target="_blank" rel="noopener noreferrer">Example</a>
+<a href="mailto:contact@example.com" class="external" target="_blank" rel="noopener noreferrer">Contact</a>
+<a href="custom:protocol" class="external" target="_blank" rel="noopener noreferrer">Custom Protocol</a>
 ```
 
 ## Development
 
-To contribute to the development of this plugin, clone the repository and install the development dependencies:
+To contribute to the development of this plugin, clone the repository and make your changes. Ensure that you have `BeautifulSoup` installed:
 
 ```bash
-git clone https://github.com/StellarWolfEntertainment/mkdocs-external-link-processor.git
-cd mkdocs-external-link-processor
-pip install -e .
+pip install beautifulsoup4
 ```
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE.md)
-
-## Author
-
-[Raistlin Wolfe](mailto:jdoonan61@gmail.com?subject=mkdocs_external_link_processor)
+This project is licensed under the [LICENSE](LICENSE.md)
