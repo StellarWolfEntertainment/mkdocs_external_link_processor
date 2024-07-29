@@ -1,0 +1,40 @@
+name: MkDocs External Link Processor CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'  # Specify the Python version to use
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Install dependencies from your requirements file
+
+      - name: Install the plugin
+        run: |
+          pip install .
+
+      - name: Run MkDocs build
+        run: |
+          mkdir docs
+          echo 'site_name: My Docs' > mkdocs.yml
+          echo 'plugins:' >> mkdocs.yml
+          echo '  - mkdocs_external_link_processor' >> mkdocs.yml
+          echo '  - search' >> mkdocs.yml
+          mkdocs build
