@@ -1,6 +1,6 @@
 # MkdocsExternalLinkProcessor
 
-The `MkdocsExternalLinkProcessor` is a [MkDocs](https://mkdocs.org) plugin designed to enhance the handling of external links in your documentation. It allows you to add specific CSS classes, set the `target` attribute, and configure the `rel` attribute for external links.
+The `MkdocsExternalLinkProcessor` is an [MkDocs](https://mkdocs.org) plugin designed to enhance the handling of external links in your documentation. It allows you to add specific CSS classes, set the `target` attribute, and configure the `rel` attribute for external links.
 
 ## Features
 
@@ -15,11 +15,10 @@ To install the plugin, include it in your MkDocs project by placing the `mkdocs_
 
 1. Save the plugin file as `mkdocs_external_link_processor.py`.
 2. Add the plugin to your `mkdocs.yml` configuration:
-
-    ```yaml
-    plugins:
-      - mkdocs_external_link_processor
-    ```
+```yaml
+plugins:
+  - mkdocs_external_link_processor
+```
 
 ## Configuration
 
