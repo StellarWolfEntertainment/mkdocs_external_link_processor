@@ -23,16 +23,16 @@ Add the plugin to your mkdocs.yml configuration file:
 ```yaml
 plugins:
   - mkdocs_external_link_processor:
-      class_name: 'external'  # Optional: default is 'external'
+      class_name: 'external'                 # Optional: default is 'external'
       link_target: '_blank'                  # Optional: default is '_blank'
       link_rel: ['noopener', 'noreferrer']   # Optional: default is ['noopener', 'noreferrer']
 ```
 
 ## Configuration
 
-`class_name`: The CSS class to add to external links. Default is external.
-`link_target`: The value for the target attribute of external links. Default is _blank.
-`link_rel`: The value for the rel attribute of external links. Default is ['noopener', 'noreferrer'].
+- **class_name**: The CSS class to add to external links. Default is external.
+- **link_target**: The value for the target attribute of external links. Default is _blank.
+- **link_rel**: The value for the rel attribute of external links. Default is \['noopener', 'noreferrer'\].
 
 ## Example
 
@@ -47,7 +47,7 @@ And the plugin is configured as follows:
 ```yaml
 plugins:
   - mkdocs_external_link_processor:
-      external_link_class_name: 'external'
+      class_name: 'external'
       link_target: '_blank'
       link_rel: ['noopener', 'noreferrer']
 ````
