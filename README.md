@@ -1,3 +1,5 @@
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/StellarWolfEntertainment/mkdocs_external_link_processor/.github%2Fworkflows%2Fworkflow.yml)
+
 # MkdocsExternalLinkProcessor
 
 The `MkdocsExternalLinkProcessor` is an [MkDocs](https://mkdocs.org) plugin designed to enhance the handling of external links in your documentation. It allows you to add specific CSS classes, set the `target` attribute, and configure the `rel` attribute for external links.
