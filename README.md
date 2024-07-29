@@ -56,8 +56,8 @@ pip install -e .
 
 ## License
 
-This project is licensed under the (MIT License)[LICENSE.md]
+This project is licensed under the [MIT License](LICENSE.md)
 
 ## Author
 
-(Raistlin Wolfe)[mailto:jdoonan61@gmail.com?subject=mkdocs_external_link_processor]
+[Raistlin Wolfe](mailto:jdoonan61@gmail.com?subject=mkdocs_external_link_processor)
