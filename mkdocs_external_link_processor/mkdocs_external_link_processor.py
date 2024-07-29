@@ -23,7 +23,7 @@ class MkdocsExternalLinkProcessor(BasePlugin):
             **kwargs: Arbitrary keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.class_name = self.config.get('external_link_class_name', 'external')
+        self.class_name = self.config.get('class_name', 'external')
         self.target = self.config.get('link_target', '_blank')
         self.rel = self.config.get('link_rel', ['noopener', 'noreferrer'])
 
@@ -56,7 +56,7 @@ class MkdocsExternalLinkProcessor(BasePlugin):
                 if not isinstance(classes, list):
                     classes = []
                 a_tag['class'] = classes + [self.class_name]
-                
+
             a_tag["target"] = self.target
             a_tag["rel"] = self.rel
         return str(soup)
